@@ -1,4 +1,4 @@
-#Impostação das bibliotecas utilizadas
+#Importação das bibliotecas utilizadas
 import pandas as pd
 import numpy as np
 import nltk
@@ -39,10 +39,6 @@ def Stemming(sentence):
         phrase.append(" ")
     return "".join(phrase)
 
-
-import numpy as np
-
-
 #Dados de treinamento
 # 1 título
 # 2 subtítulo
@@ -60,8 +56,6 @@ if tipo_analise == 3:
     
 df_select['label'] = df_temp['Index']
 
-
-
 #Considerando o processo de Stemming
 df_select['tokenized_sents'] = df_select.apply(lambda row: drop_digits(Stemming(nltk.word_tokenize(row['text']))), axis=1)
 
@@ -69,10 +63,7 @@ df_select['tokenized_sents'] = df_select.apply(lambda row: drop_digits(Stemming(
 #df_select['tokenized_sents'] = df_select.apply(lambda row: nltk.word_tokenize(row['text']), axis=1)
 #df_select['tokenized_sents'] = df_select.apply(lambda row: drop_digits(row['text']), axis=1)
 
-# 
 stopwords = set(stopwords.words('portuguese') + list(punctuation))
-
-
 Train_X, Test_X, Train_Y, Test_Y = model_selection.train_test_split(df_select['tokenized_sents'],df_select['label'],test_size = 0.10,shuffle=False)
 
 #Criando a matriz TF-IDF
@@ -92,7 +83,6 @@ df_idf = pd.DataFrame(tfidf_transformer.idf_, index=cv.get_feature_names(),colum
 df_idf.sort_values(by=['idf_weights'])
 
 #------------------------------------------------------------------------------
-
 #Utilizando o classificador SVM
 #SVM = svm.SVC(C=1.0, kernel='linear', degree=3, gamma='auto')
 #SVM = svm.SVC(C=1.0, kernel='poly', degree=5, gamma='auto')
@@ -101,7 +91,6 @@ SVM.fit(Train_X_Tfidf,Train_Y)
 #Predições
 predictions_SVM = SVM.predict(Test_X_Tfidf)
 print("SVM Accuracy Score -> ", accuracy_score(predictions_SVM, Test_Y)*100)
-
 confusion_matrix(Test_Y, predictions_SVM)
 
 #------------------------------------------------------------------------------
@@ -114,7 +103,6 @@ print("Naive Bayes Accuracy Score -> ",accuracy_score(predictions_NB, Test_Y)*10
 confusion_matrix(Test_Y, predictions_NB)
 
 #------------------------------------------------------------------------------
-
 #Utilizando classificador Ranodm Forest
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import model_selection
@@ -123,6 +111,5 @@ rfc = RandomForestClassifier(n_estimators=200, max_depth=3, random_state=0)
 rfc.fit(Train_X_Tfidf,Train_Y)
 #Predições
 rfc_predict = rfc.predict(Test_X_Tfidf)
-
 print("RandomForestClassifier Score -> ",accuracy_score(rfc_predict, Test_Y)*100)
 confusion_matrix(Test_Y, rfc_predict)
