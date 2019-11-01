@@ -28,4 +28,4 @@ Data da última revisão do documento: 06/10/2019
     c.	Determinar o uso ou não da função de stemming (linha 65-70)
     d.	Determinar o percentual de dados da janela que será dados de treinamento e dados de teste (linha 76)
 5.	Algoritmos de classificação utilizados: Naive Bayes Multinomial, Support Vector Machine (lienar) e Random Forest. 
-6.  Inicialmente a saída gerada pelo Extrator_de_notícias.py não seria disponibilizada aqui, mas recentemente (no mês Out/2019) o site do Valor Econômico mudou de layout e tal programa deixou de funcionar. Então a saída está disponibilizada no arquivo Monografia_inputs.xlsx.
+6.  Inicialmente a saída gerada pelo Extrator_de_notícias.py não seria disponibilizada aqui, mas recentemente (no mês Out/2019) o site do Valor Econômico mudou de layout e tal programa deixou de funcionar. Então a saída está disponibilizada no arquivo Extrator_outputs.xlsx.
